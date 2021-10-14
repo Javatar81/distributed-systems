@@ -33,9 +33,13 @@
             <p>Enforces annotation-based constraints defined on the
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
-                <h:message for="name" errorClass="invalid" />
+                <h:outputLabel for="firstName" value="First Name:" />
+                <h:inputText id="firstName" value="#{newMember.firstName}" />
+                <h:message for="firstName" errorClass="invalid" />
+                
+                 <h:outputLabel for="lastName" value="Last Name:" />
+                <h:inputText id="lastName" value="#{newMember.lastName}" />
+                <h:message for="lastName" errorClass="invalid" />
 
                 <h:outputLabel for="email" value="Email:" />
                 <h:inputText id="email" value="#{newMember.email}" />

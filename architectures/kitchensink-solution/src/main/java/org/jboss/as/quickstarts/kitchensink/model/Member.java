@@ -46,7 +46,12 @@ public class Member implements Serializable {
     @NotNull
     @Size(min = 1, max = 25)
     @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
-    private String name;
+    private String firstName;
+    
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Pattern(regexp = "[^0-9]*", message = "Must not contain numbers")
+    private String lastName;
 
     @NotNull
     @NotEmpty
@@ -67,15 +72,27 @@ public class Member implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getFirstName() {
+		return firstName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getEmail() {
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	public String getName() {
+		return String.format("%s %s", this.firstName, this.lastName);
+	}
+
+	public String getEmail() {
         return email;
     }
 
