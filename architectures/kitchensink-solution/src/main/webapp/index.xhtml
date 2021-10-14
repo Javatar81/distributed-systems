@@ -62,6 +62,7 @@
                 </h:panelGrid>
             </p>
         </h:form>
+        <h:form>
         <h2>Members</h2>
         <h:panelGroup rendered="#{empty members}">
             <em>No registered members.</em>
@@ -90,10 +91,17 @@
                 <a
                     href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
             </h:column>
+             <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton id="delete"
+                        action="#{memberController.delete(_member.id)}"
+                        value="delete" />
+            </h:column>
             <f:facet name="footer">
             REST URL for all members: <a
                     href="#{request.contextPath}/rest/members">/rest/members</a>
             </f:facet>
         </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>

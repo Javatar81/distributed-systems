@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
+import org.jboss.as.quickstarts.kitchensink.service.MemberDeletion;
 import org.jboss.as.quickstarts.kitchensink.service.MemberRegistration;
 
 // The @Model stereotype is a convenience mechanism to make this a request-scoped bean that has an
@@ -39,6 +40,9 @@ public class MemberController {
 
     @Inject
     private MemberRegistration memberRegistration;
+    
+    @Inject
+    private MemberDeletion memberDeletion;
 
     @Produces
     @Named
@@ -58,6 +62,19 @@ public class MemberController {
         } catch (Exception e) {
             String errorMessage = getRootErrorMessage(e);
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
+            facesContext.addMessage(null, m);
+        }
+    }
+    
+    public void delete(Long id) throws Exception {
+        try {
+        	memberDeletion.delete(id);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Deleted!", "Deletion successful");
+            facesContext.addMessage(null, m);
+            initNewMember();
+        } catch (Exception e) {
+            String errorMessage = getRootErrorMessage(e);
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Deletion unsuccessful");
             facesContext.addMessage(null, m);
         }
     }
