@@ -16,12 +16,15 @@
  */
 package org.jboss.as.quickstarts.kitchensink.service;
 
+import org.jboss.as.quickstarts.kitchensink.data.MemberRepository;
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
+import java.util.Optional;
 import java.util.logging.Logger;
 
 // The @Stateless annotation eliminates the need for manual transaction demarcation
@@ -36,10 +39,20 @@ public class MemberRegistration {
 
     @Inject
     private Event<Member> memberEventSrc;
+    
+    @Inject
+    private MemberRepository memberRepository;
 
     public void register(Member member) throws Exception {
-        log.info("Registering " + member.getName());
-        em.persist(member);
-        memberEventSrc.fire(member);
+    	// Check whether user is already in database
+    	Optional<Member> existingMember = memberRepository.findByEmail(member.getEmail());
+    	if (existingMember.isPresent()) {
+    		throw new RuntimeException(String.format("User with email '%s' already registered", existingMember.get().getEmail()));
+    	} else {    		
+    		log.info("Registering " + member.getName());
+    		em.persist(member);
+    		memberEventSrc.fire(member);
+    	}
+    	
     }
 }

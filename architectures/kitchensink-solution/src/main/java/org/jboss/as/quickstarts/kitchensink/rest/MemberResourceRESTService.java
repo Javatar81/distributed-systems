@@ -176,7 +176,7 @@ public class MemberResourceRESTService {
     public boolean emailAlreadyExists(String email) {
         Member member = null;
         try {
-            member = repository.findByEmail(email);
+            member = repository.findByEmail(email).orElse(null);
         } catch (NoResultException e) {
             // ignore
         }

@@ -23,6 +23,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
+import java.util.Optional;
 
 import org.jboss.as.quickstarts.kitchensink.model.Member;
 
@@ -36,7 +37,7 @@ public class MemberRepository {
         return em.find(Member.class, id);
     }
 
-    public Member findByEmail(String email) {
+    public Optional<Member> findByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Member> criteria = cb.createQuery(Member.class);
         Root<Member> member = criteria.from(Member.class);
@@ -44,7 +45,7 @@ public class MemberRepository {
         // feature in JPA 2.0
         // criteria.select(member).where(cb.equal(member.get(Member_.email), email));
         criteria.select(member).where(cb.equal(member.get("email"), email));
-        return em.createQuery(criteria).getSingleResult();
+        return em.createQuery(criteria).getResultList().stream().findFirst();
     }
 
     public List<Member> findAllOrderedByName() {
