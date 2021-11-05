@@ -17,17 +17,23 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.acme.messaging.MemberPublisher;
+
 @Path("/members")
 public class MemberResource {
 
 	@Inject
     EntityManager em;
 	
+	@Inject
+	MemberPublisher publisher;
+	
 	@POST
 	@Transactional
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createMember(Member member) {
-		em.persist(member);
+		//em.persist(member);
+		publisher.publishTopic(member);
 	}
 	
 	@GET
