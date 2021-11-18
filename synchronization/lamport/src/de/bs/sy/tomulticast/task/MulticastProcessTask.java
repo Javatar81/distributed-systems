@@ -4,9 +4,9 @@ import java.util.List;
 
 import de.bs.sy.lamport.Message;
 import de.bs.sy.lamport.ProcessWithClock;
-import de.bs.sy.lamport.solution.ProcessWithClockSolution;
+import de.bs.sy.lamport.task.ProcessWithClockTask;
 
-public class MulticastProcessTask extends ProcessWithClockSolution{
+public class MulticastProcessTask extends ProcessWithClockTask{
 
 	public MulticastProcessTask(int id, int clockStep) {
 		super(id, clockStep);
