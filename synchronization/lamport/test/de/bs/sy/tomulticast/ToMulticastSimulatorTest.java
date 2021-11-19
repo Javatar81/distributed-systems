@@ -7,26 +7,26 @@ import org.junit.jupiter.api.Test;
 
 import de.bs.sy.lamport.LamportSimulator;
 import de.bs.sy.lamport.Message;
-import de.bs.sy.tomulticast.task.MulticastLamportSimulatorTask;
-import de.bs.sy.tomulticast.task.MulticastProcessTask;
+import de.bs.sy.tomulticast.solution.MulticastLamportSimulatorSolution;
+import de.bs.sy.tomulticast.solution.MulticastProcessSolution;
 
 
 public class ToMulticastSimulatorTest {
 	LamportSimulator sim;
 	
 	void assertMessageInQueue(Message message, int processNumber) {
-		MulticastProcessTask process = (MulticastProcessTask) sim.getProcesses().get(processNumber);
+		MulticastProcessSolution process = (MulticastProcessSolution) sim.getProcesses().get(processNumber);
 		assertTrue(String.format("Message %s not in queue of P%s ", message, processNumber), process.isInQueue(message));
 	}
 	
 	void assertMessageNotInQueue(Message message, int processNumber) {
-		MulticastProcessTask process = (MulticastProcessTask) sim.getProcesses().get(processNumber);
+		MulticastProcessSolution process = (MulticastProcessSolution) sim.getProcesses().get(processNumber);
 		assertFalse(String.format("Message %s not in queue of P%s ", message, processNumber), process.isInQueue(message));
 	}
 
 	@Test
 	void test1() {
-		sim = new MulticastLamportSimulatorTask(6, 8, 10, 12);
+		sim = new MulticastLamportSimulatorSolution(6, 8, 10, 12);
 		Message message1 = sim.sendMessage(0, 0);
 		assertMessageInQueue(message1, 0);
 		Message message2 = sim.sendMessage(3, 3);
