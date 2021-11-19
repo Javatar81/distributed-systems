@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import de.bs.sy.lamport.task.LamportSimulatorTask;
+import de.bs.sy.lamport.solution.LamportSimulatorSolution;
 
 class LamportSimulatorTest {
 	LamportSimulator sim;
@@ -18,7 +18,7 @@ class LamportSimulatorTest {
 	
 	@Test
 	void test1() {
-		sim = new LamportSimulatorTask(6, 8, 10);
+		sim = new LamportSimulatorSolution(6, 8, 10);
 		assertClocks(0, 0, 0);
 		sim.nextCycle();
 		assertClocks(6, 8, 10);
@@ -44,7 +44,7 @@ class LamportSimulatorTest {
 	
 	@Test
 	void test2() {
-		sim = new LamportSimulatorTask(6, 8, 10);
+		sim = new LamportSimulatorSolution(6, 8, 10);
 		assertClocks(0, 0, 0);
 		sim.nextCycle();
 		assertClocks(6, 8, 10);
