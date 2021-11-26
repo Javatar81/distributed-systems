@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import de.bs.sy.comulticast.task.CoMulticastSimulatorTask;
+import de.bs.sy.comulticast.solution.CoMulticastSimulatorSolution;
 import de.bs.sy.vector.VectorClockSimulator;
 import de.bs.sy.vector.VectorMessage;
 
@@ -20,7 +20,7 @@ VectorClockSimulator sim;
 	
 	@Test
 	void test1() {
-		sim = new CoMulticastSimulatorTask(3);
+		sim = new CoMulticastSimulatorSolution(3);
 		assertClock(0, 0, 0, 0);
 		assertClock(1, 0, 0, 0);
 		assertClock(2, 0, 0, 0);

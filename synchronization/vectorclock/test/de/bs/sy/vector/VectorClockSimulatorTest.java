@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import de.bs.sy.vector.task.VectorClockSimulatorTask;
+import de.bs.sy.vector.solution.VectorClockSimulatorSolution;
 
 public class VectorClockSimulatorTest {
 
@@ -19,7 +19,7 @@ public class VectorClockSimulatorTest {
 	
 	@Test
 	void test1() {
-		sim = new VectorClockSimulatorTask(3);
+		sim = new VectorClockSimulatorSolution(3);
 		assertClock(0, 0, 0, 0);
 		assertClock(1, 0, 0, 0);
 		assertClock(2, 0, 0, 0);
