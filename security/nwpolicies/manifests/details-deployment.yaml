@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: details
+  labels:
+    app: details
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: details
+  template:
+    metadata:
+      labels:
+        app: details
+    spec:
+      containers:
+      - name: details
+        image: maxisses/bookinfo-details-v2
+        ports:
+        - containerPort: 9080
+        readinessProbe:
+          
+          httpGet:
+            path: /details/1
+            port: 9080
+          initialDelaySeconds: 10
+          failureThreshold: 5
